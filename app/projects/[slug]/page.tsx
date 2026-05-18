@@ -20,7 +20,7 @@ export function generateMetadata({ params }: Props): Metadata {
   const project = getProject(params.slug)
   if (!project) return {}
   return {
-    title: `${project.title} — Галина Бетнева`,
+    title: `${project.title} — Бетнева Studio`,
     description: project.intro,
   }
 }

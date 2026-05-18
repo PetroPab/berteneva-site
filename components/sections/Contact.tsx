@@ -64,10 +64,10 @@ export function Contact() {
               id="contact-heading"
               className="font-serif text-display-sm text-ink leading-tight mb-8"
             >
-              Напишите мне
+              Напишите нам
             </h2>
             <p className="font-sans text-body text-ink-muted mb-10">
-              Расскажите о задаче — отвечу в течение дня.
+              Расскажите о задаче — ответим в течение дня.
             </p>
 
             <ul className="space-y-5" role="list">
@@ -99,7 +99,7 @@ export function Contact() {
               <div className="bg-accent-soft px-8 py-10" role="status" aria-live="polite">
                 <p className="font-serif text-heading text-ink mb-2">Отправлено</p>
                 <p className="font-sans text-body text-ink-muted">
-                  Получила ваше сообщение — отвечу в течение дня.
+                  Получили ваше сообщение — ответим в течение дня.
                 </p>
               </div>
             ) : (

@@ -26,7 +26,7 @@ export function Services() {
           id="services-heading"
           className="font-serif text-display-sm text-ink leading-tight mb-14 max-w-lg"
         >
-          Что я делаю
+          Что мы делаем
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-px bg-rule">
@@ -66,8 +66,8 @@ export function Services() {
             {/* Цитата-акцент */}
             <blockquote className="mt-12 bg-accent-soft px-6 py-5">
               <p className="font-serif text-lg italic text-ink leading-snug">
-                «Дизайн и сайт от одного человека — визуальная целостность
-                и понятный процесс»
+                «Дизайн и разработка в одной студии — визуальная целостность
+                и чёткий процесс»
               </p>
             </blockquote>
           </div>

@@ -1,6 +1,6 @@
 import { Divider } from '@/components/ui/Divider'
 
-const year = new Date().getFullYear()
+const year = 2025
 
 export function Footer() {
   return (

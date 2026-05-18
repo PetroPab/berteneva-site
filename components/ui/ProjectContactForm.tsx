@@ -60,7 +60,7 @@ export function ProjectContactForm({ projectTitle }: ProjectContactFormProps) {
       <div className="bg-accent-soft px-8 py-10" role="status" aria-live="polite">
         <p className="font-serif text-heading text-ink mb-2">Отправлено</p>
         <p className="font-sans text-body text-ink-muted">
-          Получила ваше сообщение — отвечу в течение дня.
+          Получили ваше сообщение — ответим в течение дня.
         </p>
       </div>
     )

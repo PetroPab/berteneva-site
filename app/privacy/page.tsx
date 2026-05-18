@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 import { Divider } from '@/components/ui/Divider'
 
 export const metadata: Metadata = {
-  title: 'Политика конфиденциальности — Галина Бетнева',
+  title: 'Политика конфиденциальности — Бетнева Studio',
   description: 'Политика обработки персональных данных ИП Бетнева Галина Фёдоровна',
   robots: { index: false },
 }

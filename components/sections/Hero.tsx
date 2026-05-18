@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Divider } from '@/components/ui/Divider'
 
-const words = ['Дизайн', 'и', 'сайты', 'для', 'тех,', 'кому', 'важно', 'как']
+const words = ['Студия', 'дизайна', 'и', 'разработки', '—', 'от', 'идеи', 'до', 'запуска']
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -33,9 +33,9 @@ export function Hero() {
         <div className="pt-16 pb-12 md:pt-24 md:pb-16">
           {/* Имя */}
           <h1 className="font-serif text-display-lg md:text-display-xl text-ink leading-none tracking-tight">
-            Галина{' '}
+            Бетнева{' '}
             <em className="not-italic" style={{ fontStyle: 'italic' }}>
-              Бетнева
+              Studio
             </em>
           </h1>
 
@@ -45,7 +45,7 @@ export function Hero() {
           <div
             ref={containerRef}
             className="flex flex-wrap gap-x-3 gap-y-1 font-sans text-lead md:text-heading text-ink-muted max-w-2xl"
-            aria-label="Дизайн и сайты для тех, кому важно как"
+            aria-label="Студия дизайна и разработки — от идеи до запуска"
           >
             {words.map((word, i) => (
               <span key={i} data-word className="inline-block will-change-transform">
