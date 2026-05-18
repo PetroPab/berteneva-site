@@ -45,7 +45,7 @@ export function ProjectCard({
             className="object-cover"
             style={{
               transform: hovered ? 'scale(1.03)' : 'scale(1)',
-              transition: 'transform 400ms ease-out',
+              transition: 'transform 500ms ease-out',
             }}
           />
         ) : (
@@ -54,7 +54,7 @@ export function ProjectCard({
             style={{
               backgroundColor: placeholderColor,
               transform: hovered ? 'scale(1.03)' : 'scale(1)',
-              transition: 'transform 400ms ease-out',
+              transition: 'transform 500ms ease-out',
             }}
           >
             <span className="font-mono text-caption uppercase text-ink-muted opacity-60">
@@ -62,8 +62,32 @@ export function ProjectCard({
             </span>
           </div>
         )}
+
+        {/* Индекс — оверлей левый верхний угол */}
+        <div className="absolute top-4 left-4 z-10">
+          <span
+            className="font-mono text-caption uppercase tracking-widest text-white px-2 py-1 transition-colors duration-200"
+            style={{
+              backgroundColor: hovered ? '#C2410C' : 'rgba(26,26,26,0.45)',
+              letterSpacing: '0.08em',
+            }}
+          >
+            {String(index).padStart(2, '0')}
+          </span>
+        </div>
+
+        {/* Акцент-полоса снизу — въезжает на hover */}
+        <div
+          className="absolute bottom-0 left-0 h-1 bg-accent z-10"
+          style={{
+            width: hovered ? '100%' : '0%',
+            transition: 'width 450ms ease-out',
+          }}
+          aria-hidden="true"
+        />
       </div>
 
+      {/* Подпись */}
       <div
         className="mt-4"
         style={{
