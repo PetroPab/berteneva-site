@@ -34,14 +34,23 @@ export function Contact() {
   })
 
   const onSubmit = async (data: FormData) => {
+    if (data._hp) return
     setStatus('loading')
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: '51b8c79b-7a3b-4c8c-9144-83c5c5b48783',
+          subject: `Новая заявка от ${data.name}`,
+          from_name: 'Бетнева Studio',
+          name: data.name,
+          email: data.email,
+          message: data.message,
+        }),
       })
-      if (!res.ok) throw new Error()
+      const result = await res.json()
+      if (!result.success) throw new Error()
       setStatus('success')
       reset()
     } catch {
