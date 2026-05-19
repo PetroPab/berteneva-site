@@ -41,7 +41,7 @@ export function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: '51b8c79b-7a3b-4c8c-9144-83c5c5b48783',
+          access_key: '69bceeb3-2d40-4b0d-9700-84693cc04d75',
           subject: `Новая заявка от ${data.name}`,
           from_name: 'Бетнева Studio',
           name: data.name,
