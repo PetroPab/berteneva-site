@@ -7,6 +7,7 @@ import { getProject, getAllSlugs } from '@/lib/projects'
 import { Divider } from '@/components/ui/Divider'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { ProjectContactForm } from '@/components/ui/ProjectContactForm'
+import { ObfuscatedContact } from '@/components/ui/ObfuscatedContact'
 
 interface Props {
   params: { slug: string }
@@ -213,12 +214,7 @@ export default function ProjectPage({ params }: Props) {
             </p>
             <div className="mt-8 flex items-center gap-3">
               <Mail size={16} className="text-ink-muted" aria-hidden="true" />
-              <a
-                href="mailto:omnistaffe@gmail.com"
-                className="font-sans text-sm text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center"
-              >
-                omnistaffe@gmail.com
-              </a>
+              <ObfuscatedContact type="email" className="font-sans text-sm text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center" />
             </div>
           </div>
           <div className="md:col-span-7 md:col-start-6">

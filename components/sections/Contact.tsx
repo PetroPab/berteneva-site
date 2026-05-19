@@ -7,6 +7,7 @@ import { z } from 'zod'
 import { Mail, Phone } from 'lucide-react'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { Button } from '@/components/ui/Button'
+import { ObfuscatedContact } from '@/components/ui/ObfuscatedContact'
 
 const schema = z.object({
   name: z.string().min(2, 'Введите имя (минимум 2 символа)'),
@@ -41,7 +42,7 @@ export function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: '69bceeb3-2d40-4b0d-9700-84693cc04d75',
+          access_key: '51b8c79b-7a3b-4c8c-9144-83c5c5b48783',
           subject: `Новая заявка от ${data.name}`,
           from_name: 'Бетнева Studio',
           name: data.name,
@@ -82,21 +83,11 @@ export function Contact() {
             <ul className="space-y-5" role="list">
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-ink-muted flex-shrink-0" aria-hidden="true" />
-                <a
-                  href="tel:+79109745521"
-                  className="font-sans text-body text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center"
-                >
-                  +7 910 974-55-21
-                </a>
+                <ObfuscatedContact type="phone" className="font-sans text-body text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center" />
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-ink-muted flex-shrink-0" aria-hidden="true" />
-                <a
-                  href="mailto:omnistaffe@gmail.com"
-                  className="font-sans text-body text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center"
-                >
-                  omnistaffe@gmail.com
-                </a>
+                <ObfuscatedContact type="email" className="font-sans text-body text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center" />
               </li>
             </ul>
           </div>

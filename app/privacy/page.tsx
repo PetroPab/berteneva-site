@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Divider } from '@/components/ui/Divider'
+import { ObfuscatedContact } from '@/components/ui/ObfuscatedContact'
 
 export const metadata: Metadata = {
   title: 'Политика конфиденциальности — Бетнева Studio',
@@ -55,8 +56,8 @@ export default function PrivacyPage() {
               Бетнева Галина Фёдоровна (ИНН&nbsp;760300311780), далее — «Оператор».
             </p>
             <p>
-              Контактный телефон: <a href="tel:+79109745521" className="underline hover:text-accent transition-colors">+7&nbsp;910&nbsp;974-55-21</a><br />
-              Электронная почта: <a href="mailto:omnistaffe@gmail.com" className="underline hover:text-accent transition-colors">omnistaffe@gmail.com</a>
+              Контактный телефон: <ObfuscatedContact type="phone" className="underline hover:text-accent transition-colors" /><br />
+              Электронная почта: <ObfuscatedContact type="email" className="underline hover:text-accent transition-colors" />
             </p>
           </div>
         </section>
@@ -185,9 +186,7 @@ export default function PrivacyPage() {
             </ul>
             <p>
               Для реализации прав направьте запрос по электронной почте:{' '}
-              <a href="mailto:omnistaffe@gmail.com" className="underline hover:text-accent transition-colors">
-                omnistaffe@gmail.com
-              </a>
+              <ObfuscatedContact type="email" className="underline hover:text-accent transition-colors" />
               . Оператор рассматривает запросы в течение 10 рабочих дней.
             </p>
           </div>
