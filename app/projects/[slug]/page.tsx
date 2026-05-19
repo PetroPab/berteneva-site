@@ -214,10 +214,10 @@ export default function ProjectPage({ params }: Props) {
             <div className="mt-8 flex items-center gap-3">
               <Mail size={16} className="text-ink-muted" aria-hidden="true" />
               <a
-                href="mailto:hello@betneva-site.ru"
+                href="mailto:omnistaffe@gmail.com"
                 className="font-sans text-sm text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center"
               >
-                hello@betneva-site.ru
+                omnistaffe@gmail.com
               </a>
             </div>
           </div>

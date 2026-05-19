@@ -56,7 +56,7 @@ export default function PrivacyPage() {
             </p>
             <p>
               Контактный телефон: <a href="tel:+79109745521" className="underline hover:text-accent transition-colors">+7&nbsp;910&nbsp;974-55-21</a><br />
-              Электронная почта: <a href="mailto:hello@betneva-site.ru" className="underline hover:text-accent transition-colors">hello@betneva-site.ru</a>
+              Электронная почта: <a href="mailto:omnistaffe@gmail.com" className="underline hover:text-accent transition-colors">omnistaffe@gmail.com</a>
             </p>
           </div>
         </section>
@@ -185,8 +185,8 @@ export default function PrivacyPage() {
             </ul>
             <p>
               Для реализации прав направьте запрос по электронной почте:{' '}
-              <a href="mailto:hello@betneva-site.ru" className="underline hover:text-accent transition-colors">
-                hello@betneva-site.ru
+              <a href="mailto:omnistaffe@gmail.com" className="underline hover:text-accent transition-colors">
+                omnistaffe@gmail.com
               </a>
               . Оператор рассматривает запросы в течение 10 рабочих дней.
             </p>

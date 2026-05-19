@@ -82,12 +82,11 @@ export function Contact() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-ink-muted flex-shrink-0" aria-hidden="true" />
-                {/* Заменить на реальный email */}
                 <a
-                  href="mailto:hello@betneva-site.ru"
+                  href="mailto:omnistaffe@gmail.com"
                   className="font-sans text-body text-ink hover:text-accent transition-colors duration-150 min-h-[44px] flex items-center"
                 >
-                  hello@betneva-site.ru
+                  omnistaffe@gmail.com
                 </a>
               </li>
             </ul>

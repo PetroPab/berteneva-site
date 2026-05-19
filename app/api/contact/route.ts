@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -31,22 +30,31 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true })
   }
 
-  const apiKey = process.env.RESEND_API_KEY
-  const to = process.env.CONTACT_EMAIL
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY
 
-  if (!apiKey || !to) {
+  if (!accessKey) {
     return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 })
   }
 
   try {
-    const resend = new Resend(apiKey)
-    await resend.emails.send({
-      from: 'betneva-site <noreply@betneva-site.ru>',
-      to,
-      reply_to: email,
-      subject: `Новая заявка от ${name}`,
-      text: `Имя: ${name}\nEmail: ${email}\n\n${message}`,
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: accessKey,
+        subject: `Новая заявка от ${name}`,
+        from_name: 'Бетнева Studio',
+        name,
+        email,
+        message,
+      }),
     })
+
+    const data = await res.json()
+    if (!data.success) {
+      return NextResponse.json({ error: 'Send failed' }, { status: 500 })
+    }
+
     return NextResponse.json({ ok: true })
   } catch {
     return NextResponse.json({ error: 'Send failed' }, { status: 500 })

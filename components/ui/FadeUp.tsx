@@ -1,7 +1,7 @@
 'use client'
 
+import { useState, useEffect, useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { useRef } from 'react'
 
 const motionComponents = {
   div: motion.div,
@@ -23,11 +23,20 @@ interface FadeUpProps {
 }
 
 export function FadeUp({ children, className = '', delay = 0, as = 'div' }: FadeUpProps) {
+  const [mounted, setMounted] = useState(false)
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px 0px' })
   const shouldReduce = useReducedMotion()
 
+  useEffect(() => { setMounted(true) }, [])
+
   const Component = motionComponents[as] as typeof motion.div
+
+  // До гидрации — рендерим контент видимым (без initial opacity:0 в SSR-HTML)
+  if (!mounted) {
+    const Tag = as as keyof JSX.IntrinsicElements
+    return <Tag className={className}>{children}</Tag>
+  }
 
   return (
     <Component
