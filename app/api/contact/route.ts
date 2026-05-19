@@ -50,14 +50,19 @@ export async function POST(req: NextRequest) {
       }),
     })
 
-    const data = await res.json()
+    const text = await res.text()
+    console.log('Web3Forms status:', res.status, 'body:', text)
+
+    let data: { success?: boolean }
+    try { data = JSON.parse(text) } catch { data = {} }
+
     if (!data.success) {
-      console.error('Web3Forms error:', data)
-      return NextResponse.json({ error: 'Send failed', detail: data }, { status: 500 })
+      return NextResponse.json({ error: 'Send failed', detail: text }, { status: 500 })
     }
 
     return NextResponse.json({ ok: true })
-  } catch {
+  } catch (err) {
+    console.error('Web3Forms fetch error:', err)
     return NextResponse.json({ error: 'Send failed' }, { status: 500 })
   }
 }
