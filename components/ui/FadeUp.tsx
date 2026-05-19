@@ -25,14 +25,13 @@ interface FadeUpProps {
 export function FadeUp({ children, className = '', delay = 0, as = 'div' }: FadeUpProps) {
   const [mounted, setMounted] = useState(false)
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-60px 0px' })
+  const isInView = useInView(ref, { once: true, margin: '-10px 0px' })
   const shouldReduce = useReducedMotion()
 
   useEffect(() => { setMounted(true) }, [])
 
   const Component = motionComponents[as] as typeof motion.div
 
-  // До гидрации — рендерим контент видимым (без initial opacity:0 в SSR-HTML)
   if (!mounted) {
     const Tag = as as keyof JSX.IntrinsicElements
     return <Tag className={className}>{children}</Tag>
@@ -43,7 +42,7 @@ export function FadeUp({ children, className = '', delay = 0, as = 'div' }: Fade
       ref={ref as React.RefObject<HTMLDivElement>}
       className={className}
       initial={{ opacity: 0, y: shouldReduce ? 0 : 24 }}
-      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : (shouldReduce ? 0 : 24) }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: shouldReduce ? 0.01 : 0.5, ease: 'easeOut', delay: shouldReduce ? 0 : delay }}
     >
       {children}
