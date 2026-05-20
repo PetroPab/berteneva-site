@@ -1,19 +1,8 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
 
-const motionComponents = {
-  div: motion.div,
-  li: motion.li,
-  section: motion.section,
-  article: motion.article,
-  p: motion.p,
-  h2: motion.h2,
-  h3: motion.h3,
-} as const
-
-type Tag = keyof typeof motionComponents
+type Tag = 'div' | 'li' | 'section' | 'article' | 'p' | 'h2' | 'h3'
 
 interface FadeUpProps {
   children: React.ReactNode
@@ -22,37 +11,45 @@ interface FadeUpProps {
   as?: Tag
 }
 
-function AnimatedWrapper({ children, className, delay, as }: Required<FadeUpProps>) {
+export function FadeUp({ children, className = '', delay = 0, as: Tag = 'div' }: FadeUpProps) {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-10px 0px' })
-  const shouldReduce = useReducedMotion()
-  const Component = motionComponents[as] as typeof motion.div
+  const [state, setState] = useState<'ssr' | 'hidden' | 'visible'>('ssr')
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) { setState('visible'); return }
+
+    // Уже в viewport при загрузке — показываем без анимации
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight - 10) {
+      setState('visible')
+      return
+    }
+
+    // Ниже fold — скрываем и ждём скролла
+    setState('hidden')
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setState('visible'); observer.disconnect() } },
+      { rootMargin: '-10px 0px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  const style: React.CSSProperties =
+    state === 'hidden'
+      ? { opacity: 0, transform: 'translateY(24px)' }
+      : state === 'visible'
+      ? { opacity: 1, transform: 'none', transition: `opacity 0.5s ease-out ${delay}s, transform 0.5s ease-out ${delay}s` }
+      : {}
 
   return (
-    <Component
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={className}
-      initial={{ opacity: 0, y: shouldReduce ? 0 : 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: shouldReduce ? 0.01 : 0.5, ease: 'easeOut', delay: shouldReduce ? 0 : delay }}
-    >
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Tag ref={ref as any} className={className} style={style}>
       {children}
-    </Component>
-  )
-}
-
-export function FadeUp({ children, className = '', delay = 0, as = 'div' }: FadeUpProps) {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => { setMounted(true) }, [])
-
-  if (!mounted) {
-    const Tag = as as keyof JSX.IntrinsicElements
-    return <Tag className={className}>{children}</Tag>
-  }
-
-  return (
-    <AnimatedWrapper className={className} delay={delay} as={as}>
-      {children}
-    </AnimatedWrapper>
+    </Tag>
   )
 }
