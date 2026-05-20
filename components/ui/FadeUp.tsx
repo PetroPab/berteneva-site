@@ -22,20 +22,11 @@ interface FadeUpProps {
   as?: Tag
 }
 
-export function FadeUp({ children, className = '', delay = 0, as = 'div' }: FadeUpProps) {
-  const [mounted, setMounted] = useState(false)
+function AnimatedWrapper({ children, className, delay, as }: Required<FadeUpProps>) {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10px 0px' })
   const shouldReduce = useReducedMotion()
-
-  useEffect(() => { setMounted(true) }, [])
-
   const Component = motionComponents[as] as typeof motion.div
-
-  if (!mounted) {
-    const Tag = as as keyof JSX.IntrinsicElements
-    return <Tag className={className}>{children}</Tag>
-  }
 
   return (
     <Component
@@ -47,5 +38,21 @@ export function FadeUp({ children, className = '', delay = 0, as = 'div' }: Fade
     >
       {children}
     </Component>
+  )
+}
+
+export function FadeUp({ children, className = '', delay = 0, as = 'div' }: FadeUpProps) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+
+  if (!mounted) {
+    const Tag = as as keyof JSX.IntrinsicElements
+    return <Tag className={className}>{children}</Tag>
+  }
+
+  return (
+    <AnimatedWrapper className={className} delay={delay} as={as}>
+      {children}
+    </AnimatedWrapper>
   )
 }
